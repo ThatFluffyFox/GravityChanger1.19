@@ -12,7 +12,7 @@ import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.math.Direction;
 
 import java.util.Collection;
@@ -62,11 +62,11 @@ public class GravityCommand {
     }
 
     private static void getSendFeedback(ServerCommandSource source, Entity entity, Direction gravityDirection) {
-        Text text = new TranslatableText("direction." + gravityDirection.getName());
+        Text text = (Text) new TranslatableTextContent("direction." + gravityDirection.getName());
         if (source.getEntity() != null && source.getEntity() == entity) {
-            source.sendFeedback(new TranslatableText("commands.gravity.get.self", text), true);
+            source.sendFeedback((Text) new TranslatableTextContent("commands.gravity.get.self", text), true);
         } else {
-            source.sendFeedback(new TranslatableText("commands.gravity.get.other", entity.getDisplayName(), text), true);
+            source.sendFeedback((Text) new TranslatableTextContent("commands.gravity.get.other", entity.getDisplayName(), text), true);
         }
     }
 
